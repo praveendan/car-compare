@@ -17,7 +17,6 @@ const Comparer: React.FC = () => {
 
   const removeFunction = (index: number) => {
     const comparisonCopy = [...comparisons]
-    console.log(index)
     comparisonCopy.splice(index, 1)
     setComparisons(comparisonCopy)
   }
@@ -45,6 +44,7 @@ const Comparer: React.FC = () => {
             >
               <CarForm
                 index={index}
+                formData={comparisons[index]}
                 updateFunction={updateFunction}
                 removeFunction={() => removeFunction(index)}
                 removeDisabled={comparisons.length === 2}
@@ -56,13 +56,13 @@ const Comparer: React.FC = () => {
           <Button
             variant="primary"
             type="submit"
-            className='w-100'
+            className='w-100 h-100'
             onClick={_ => {
               const comparisonCopy = [...comparisons]
               comparisonCopy.push(DEFAULT_COMPARISON)
               setComparisons(comparisonCopy)
             }}
-            disabled={comparisons.length === MAX_COMPARISONS}>Add one</Button>
+            disabled={comparisons.length === MAX_COMPARISONS}>+</Button>
         </Col>
       </Row>
       <Row className='pt-2'>

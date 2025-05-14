@@ -5,15 +5,17 @@ import { ChangeEvent } from 'react';
 
 const CarForm: React.FC<{
   index: number
+  formData: Comparison
   removeDisabled: boolean
   removeFunction: () => void
   updateFunction: (index: number, formData: Partial<Comparison>) => void
-}> = ({ index, removeDisabled, removeFunction, updateFunction }) => {
+}> = ({ index, formData, removeDisabled, removeFunction, updateFunction }) => {
   return (
     <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Brand</Form.Label>
         <Form.Select
+          value={formData.brand}
           aria-label="Default select example"
           onChange={(e: ChangeEvent<HTMLSelectElement>) => updateFunction(index, {brand: e.target.value})}
         >
@@ -26,6 +28,7 @@ const CarForm: React.FC<{
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Model</Form.Label>
         <Form.Select
+          value={formData.model}
           aria-label="Default select example"
           onChange={(e: ChangeEvent<HTMLSelectElement>) => updateFunction(index, { model: e.target.value })}
         >
