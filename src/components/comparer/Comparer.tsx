@@ -6,6 +6,7 @@ import { Button } from 'react-bootstrap';
 import { useState } from 'react';
 import { Comparison } from './types';
 import { MAX_COMPARISONS } from '../../constants';
+import DetailsPane from './DetailsPane';
 
 const DEFAULT_COMPARISON: Comparison = {
   brand: '',
@@ -33,6 +34,7 @@ const Comparer: React.FC = () => {
   return (
     <Container>
       <Row>
+        <Col xs={12} md={6} lg={1} className="pb-2 border-top d-none d-lg-block"></Col>
         {
           comparisons.map((_, index) => (
             <Col
@@ -70,6 +72,7 @@ const Comparer: React.FC = () => {
           Compare
         </Button>
       </Row>
+      <DetailsPane comparisons={comparisons}/>
     </Container>
   );
 }
