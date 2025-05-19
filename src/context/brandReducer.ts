@@ -1,5 +1,5 @@
 import { Brand } from '../types/common.types';
-import { BrandAction } from './actionTypes';
+import { BrandAction } from './action.types';
 
 export interface BrandState {
   brands: Brand[]

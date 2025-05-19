@@ -1,5 +1,5 @@
 import { Model } from '../types/common.types';
-import { ModelAction } from './actionTypes';
+import { ModelAction } from './action.types';
 
 export interface ModelState {
   brandModels: Map<number, Model[]>

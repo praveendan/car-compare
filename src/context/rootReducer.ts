@@ -1,5 +1,5 @@
 import { AppState } from './types';
-import { AppAction } from './actionTypes';
+import { AppAction } from './action.types';
 import { authReducer, initialAuthState } from './modelReducer';
 import { brandReducer, initialBrandState } from './brandReducer';
 
