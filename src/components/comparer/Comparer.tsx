@@ -3,17 +3,24 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import CarForm from './CarForm';
 import { Button } from 'react-bootstrap';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Comparison } from './types';
 import { MAX_COMPARISONS } from '../../constants';
 import DetailsPane from './DetailsPane';
+import { getVehicleBrandData } from '../../api/data';
+import { Model } from '../../types/common.types';
+import { GlobalContext } from '../../context/GlobalProvider';
 
 const DEFAULT_COMPARISON: Comparison = {
   brand: '',
   model: ''
 }
 
+// move this to context or redux
+const cachedModelData = new Map<number, Model[]>()
+
 const Comparer: React.FC = () => {
+  const { dispatch } = useContext(GlobalContext);
   const [comparisons, setComparisons] = useState<Comparison[]>([DEFAULT_COMPARISON, DEFAULT_COMPARISON])
 
   const removeFunction = (index: number) => {
@@ -30,6 +37,15 @@ const Comparer: React.FC = () => {
     }
     setComparisons(comparisonCopy)
   }
+
+  useEffect(() => {
+    const dataLoader = async () => {
+      const data = await getVehicleBrandData()
+      dispatch({ type: 'ADD_BRANDS', payload: data.brands})
+    }
+
+    dataLoader()
+  }, [dispatch])
 
   return (
     <Container>
@@ -67,12 +83,12 @@ const Comparer: React.FC = () => {
             disabled={comparisons.length === MAX_COMPARISONS}>+</Button>
         </Col>
       </Row>
-      <Row className='pt-2'>
+      <Row className="pb-2">
         <Button variant="primary" type="submit">
           Compare
         </Button>
       </Row>
-      <DetailsPane comparisons={comparisons}/>
+      <DetailsPane comparisons={comparisons} />
     </Container>
   );
 }
