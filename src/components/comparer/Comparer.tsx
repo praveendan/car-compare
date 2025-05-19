@@ -8,16 +8,12 @@ import { Comparison } from './types';
 import { MAX_COMPARISONS } from '../../constants';
 import DetailsPane from './DetailsPane';
 import { getVehicleBrandData } from '../../api/data';
-import { Model } from '../../types/common.types';
 import { GlobalContext } from '../../context/GlobalProvider';
 
 const DEFAULT_COMPARISON: Comparison = {
   brand: '',
   model: ''
 }
-
-// move this to context or redux
-const cachedModelData = new Map<number, Model[]>()
 
 const Comparer: React.FC = () => {
   const { dispatch } = useContext(GlobalContext);
