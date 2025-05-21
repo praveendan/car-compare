@@ -1,8 +1,8 @@
-import { Brand } from '../types/common.types';
 import { BrandAction } from './action.types';
+import { Brands } from './types';
 
 export interface BrandState {
-  brands: Brand[]
+  brands: Brands
 }
 
 export const initialBrandState: BrandState = {
@@ -17,7 +17,7 @@ export function brandReducer(state: BrandState, action: BrandAction): BrandState
       }
     }
     default: {
-      throw Error("Unknown action: " + action.type);
+      return state
     }
   }
 }

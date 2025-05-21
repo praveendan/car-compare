@@ -1,8 +1,8 @@
-import { Model } from '../types/common.types';
 import { ModelAction } from './action.types';
+import { BrandModels } from './types';
 
 export interface ModelState {
-  brandModels: Map<number, Model[]>
+  brandModels: BrandModels
 }
 
 export const initialModelState: ModelState = {
@@ -12,20 +12,19 @@ export const initialModelState: ModelState = {
 export function modelReducer(state: ModelState, action: ModelAction): ModelState {
   switch (action.type) {
     case 'ADD_MODELS':
-      if (action.payload.length === 0) {
+      if (action.payload.models.length === 0) {
         return state
       }
 
-      const makeId = action.payload[0].makeId
+      const brand = action.payload.brand
       const brandModelsCopy = new Map(state.brandModels)
 
-      if (brandModelsCopy.has(makeId)) {
-        const brandModels = brandModelsCopy.get(makeId)!
-        brandModels.push(...action.payload)
-        brandModelsCopy.set(makeId, brandModels)
+      if (brandModelsCopy.has(brand)) {
+        const brandModels = brandModelsCopy.get(brand)!
+        brandModels.push(...action.payload.models)
       }
       else {
-        brandModelsCopy.set(makeId, action.payload)
+        brandModelsCopy.set(brand, action.payload.models)
       }
 
       return {

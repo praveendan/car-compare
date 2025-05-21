@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import { Comparison } from './types';
 import { ChangeEvent, useContext } from 'react';
 import { GlobalContext } from '../../context/GlobalProvider';
+import { loadAndSetModelData } from '../../api/data';
 
 const CarForm: React.FC<{
   index: number
@@ -11,10 +12,12 @@ const CarForm: React.FC<{
   removeFunction: () => void
   updateFunction: (index: number, formData: Partial<Comparison>) => void
 }> = ({ index, formData, removeDisabled, removeFunction, updateFunction }) => {
-  const { state } = useContext(GlobalContext);
+  const { state, dispatch } = useContext(GlobalContext);
 
   const onBrandChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    updateFunction(index, { brand: e.target.value })
+    const brand = e.target.value
+    loadAndSetModelData(brand, state, dispatch)
+    updateFunction(index, { brand })
   }
   
   return (
@@ -39,10 +42,10 @@ const CarForm: React.FC<{
           aria-label="Default select example"
           onChange={(e: ChangeEvent<HTMLSelectElement>) => updateFunction(index, { model: e.target.value })}
         >
-          <option>Open this select menu</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option>Select</option>
+          {
+            (state.brandModels.brandModels.get(formData.brand) || []).map(model => <option value={model.id} key={model.id}>{model.name}</option>)
+          }
         </Form.Select>
       </Form.Group>
       <Button

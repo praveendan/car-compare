@@ -5,6 +5,6 @@ export interface Brand {
 
 export interface Model {
   id: number
-  makeId: number
+  //makeId: number
   name: string
 }
