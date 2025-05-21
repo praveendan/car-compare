@@ -16,7 +16,7 @@ const DEFAULT_COMPARISON: Comparison = {
 }
 
 const Comparer: React.FC = () => {
-  const { dispatch } = useContext(GlobalContext);
+  const { state, dispatch } = useContext(GlobalContext);
   const [comparisons, setComparisons] = useState<Comparison[]>([DEFAULT_COMPARISON, DEFAULT_COMPARISON])
 
   const removeFunction = (index: number) => {
@@ -40,8 +40,10 @@ const Comparer: React.FC = () => {
       dispatch({ type: 'ADD_BRANDS', payload: data.brands})
     }
 
-    dataLoader()
-  }, [dispatch])
+    if (state.brands.brands.length === 0) {
+      dataLoader()
+    }
+  }, [dispatch, state.brands.brands.length])
 
   return (
     <Container>
