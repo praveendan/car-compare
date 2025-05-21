@@ -23,6 +23,10 @@ const CarForm: React.FC<{
   const onModelChange = (e: ChangeEvent<HTMLSelectElement>) => { 
     updateFunction(index, { model: e.target.value })
   }
+
+  const onTrimChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    updateFunction(index, { trim: e.target.value })
+  }
   
   return (
     <Form>
@@ -30,7 +34,7 @@ const CarForm: React.FC<{
         <Form.Label>Brand</Form.Label>
         <Form.Select
           value={formData.brand}
-          aria-label="Default select example"
+          aria-label="Brand Select"
           onChange={onBrandChange}
         >
           <option>Select</option>
@@ -43,13 +47,25 @@ const CarForm: React.FC<{
         <Form.Label>Model</Form.Label>
         <Form.Select
           value={formData.model}
-          aria-label="Default select example"
+          aria-label="Model Select"
           onChange={onModelChange}
+          disabled={formData.brand===''}
         >
           <option>Select</option>
           {
             (state.brandModels.brandModels.get(formData.brand) || []).map(model => <option value={model.id} key={model.id}>{model.name}</option>)
           }
+        </Form.Select>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Trim</Form.Label>
+        <Form.Select
+          value={formData.trim}
+          aria-label="Trim Select"
+          onChange={onTrimChange}
+          disabled={formData.model === ''}
+        >
+          <option>Select</option>
         </Form.Select>
       </Form.Group>
       <Button

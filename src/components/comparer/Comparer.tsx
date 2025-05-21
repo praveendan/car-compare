@@ -12,7 +12,8 @@ import { GlobalContext } from '../../context/GlobalProvider';
 
 const DEFAULT_COMPARISON: Comparison = {
   brand: '',
-  model: ''
+  model: '',
+  trim: ''
 }
 
 const Comparer: React.FC = () => {
