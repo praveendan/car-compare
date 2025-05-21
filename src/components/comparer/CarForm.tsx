@@ -19,6 +19,10 @@ const CarForm: React.FC<{
     loadAndSetModelData(brand, state, dispatch)
     updateFunction(index, { brand })
   }
+
+  const onModelChange = (e: ChangeEvent<HTMLSelectElement>) => { 
+    updateFunction(index, { model: e.target.value })
+  }
   
   return (
     <Form>
@@ -40,7 +44,7 @@ const CarForm: React.FC<{
         <Form.Select
           value={formData.model}
           aria-label="Default select example"
-          onChange={(e: ChangeEvent<HTMLSelectElement>) => updateFunction(index, { model: e.target.value })}
+          onChange={onModelChange}
         >
           <option>Select</option>
           {
