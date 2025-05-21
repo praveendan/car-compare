@@ -5,11 +5,11 @@ export interface ModelState {
   brandModels: Map<number, Model[]>
 }
 
-export const initialAuthState: ModelState = {
+export const initialModelState: ModelState = {
   brandModels: new Map()
 };
 
-export function authReducer(state: ModelState, action: ModelAction): ModelState {
+export function modelReducer(state: ModelState, action: ModelAction): ModelState {
   switch (action.type) {
     case 'ADD_MODELS':
       if (action.payload.length === 0) {

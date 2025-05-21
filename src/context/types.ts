@@ -1,14 +1,14 @@
 import { Brand, Model } from "../types/common.types";
 
-interface AuthState {
+interface ModelState {
   brandModels: Map<number, Model[]>;
 }
 
-interface ThemeState {
+interface BrandState {
   brands: Brand[];
 }
 
 export interface AppState {
-  brandModels: AuthState;
-  brands: ThemeState;
+  brandModels: ModelState;
+  brands: BrandState;
 }
