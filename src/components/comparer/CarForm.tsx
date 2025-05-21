@@ -12,6 +12,10 @@ const CarForm: React.FC<{
   updateFunction: (index: number, formData: Partial<Comparison>) => void
 }> = ({ index, formData, removeDisabled, removeFunction, updateFunction }) => {
   const { state } = useContext(GlobalContext);
+
+  const onBrandChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    updateFunction(index, { brand: e.target.value })
+  }
   
   return (
     <Form>
@@ -20,11 +24,11 @@ const CarForm: React.FC<{
         <Form.Select
           value={formData.brand}
           aria-label="Default select example"
-          onChange={(e: ChangeEvent<HTMLSelectElement>) => updateFunction(index, {brand: e.target.value})}
+          onChange={onBrandChange}
         >
           <option>Select</option>
           {
-            state.brands.brands.map(item => <option key={item.id} value={item.id}>{item.name}</option>)
+            state.brands.brands.map(item => <option key={item.id} value={item.name}>{item.name}</option>)
           }
         </Form.Select>
       </Form.Group>
