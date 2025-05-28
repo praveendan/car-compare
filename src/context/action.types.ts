@@ -7,4 +7,4 @@ export type ModelAction = { type: 'ADD_MODELS'; payload: { brand: string; models
 
 export type BrandAction = { type: 'ADD_BRANDS', payload: Brands };
 
-export type AppAction = ModelAction | BrandAction;
+export type AppAction = ModelAction | BrandAction | YearAction;
