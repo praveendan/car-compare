@@ -4,6 +4,10 @@ import { ServerException, VehicleBrandData } from "../types/api.types";
 import { AppAction } from "../context/action.types";
 import { AppState } from "../context/types";
 
+/**
+ * 
+ * @returns brands
+ */
 export const getVehicleBrandData = async (): Promise<VehicleBrandData> => {
   const data: VehicleBrandData = {
     brands: [],
@@ -41,6 +45,13 @@ export const getVehicleBrandData = async (): Promise<VehicleBrandData> => {
   return data
 }
 
+/**
+ * 
+ * @param brandName brand name
+ * @param state current context
+ * @param dispatch set the current context
+ * This will fetch model data from the cache. if it does not exist, it will fetch from the server
+ */
 export const loadAndSetModelData = async (brandName: string, state: AppState, dispatch: React.Dispatch<AppAction>) => {
   if (!state.brandModels.brandModels.has(brandName)) {
     try {
