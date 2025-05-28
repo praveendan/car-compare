@@ -1,6 +1,6 @@
 import { Brand, Model } from "../types/common.types";
 
-export type BrandModelYears = Map<string, String[]>
+export type BrandModelYears = Map<string, string[]>
 export type BrandModels = Map<string, Model[]>
 export type Brands = Brand[]
 
