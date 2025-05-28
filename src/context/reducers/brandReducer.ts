@@ -1,5 +1,5 @@
-import { BrandAction } from './action.types';
-import { Brands } from './types';
+import { BrandAction } from '../action.types';
+import { Brands } from '../types';
 
 export interface BrandState {
   brands: Brands

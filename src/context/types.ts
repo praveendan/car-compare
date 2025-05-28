@@ -1,7 +1,12 @@
 import { Brand, Model } from "../types/common.types";
 
+export type BrandModelYears = Map<string, String[]>
 export type BrandModels = Map<string, Model[]>
 export type Brands = Brand[]
+
+interface YearState {
+  brandModelYears: BrandModelYears
+}
 
 interface ModelState {
   brandModels: BrandModels
@@ -12,6 +17,7 @@ interface BrandState {
 }
 
 export interface AppState {
+  brandModelYears: YearState;
   brandModels: ModelState;
   brands: BrandState;
 }

@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, ReactNode } from 'react';
 import { AppState } from './types';
 import { AppAction } from './action.types';
-import { rootReducer, initialAppState } from './rootReducer';
+import { rootReducer, initialAppState } from './reducers/rootReducer';
 
 interface GlobalContextProps {
   state: AppState;
