@@ -3,7 +3,8 @@ import Form from 'react-bootstrap/Form';
 import { Comparison } from './types';
 import { ChangeEvent, useContext } from 'react';
 import { GlobalContext } from '../../context/GlobalProvider';
-import { loadAndSetModelData } from '../../api/data';
+import { loadAndSetModelData, loadAndSetModelYearData } from '../../api/data';
+import { getYearStorageKey } from '../../context/helpers';
 
 const CarForm: React.FC<{
   index: number
@@ -16,12 +17,22 @@ const CarForm: React.FC<{
 
   const onBrandChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const brand = e.target.value
-    loadAndSetModelData(brand, state, dispatch)
+    if (brand !== '') {
+      loadAndSetModelData(brand, state, dispatch)
+    }
     updateFunction(index, { brand })
   }
 
-  const onModelChange = (e: ChangeEvent<HTMLSelectElement>) => { 
-    updateFunction(index, { model: e.target.value })
+  const onModelChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const model = e.target.value
+    if (formData.brand !== '' && model !== '') {
+      loadAndSetModelYearData(formData.brand, model, state, dispatch)
+    }
+    updateFunction(index, { model })
+  }
+
+  const onYearChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    updateFunction(index, { year: e.target.value })
   }
 
   const onTrimChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -58,12 +69,26 @@ const CarForm: React.FC<{
         </Form.Select>
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Year</Form.Label>
+        <Form.Select
+          value={formData.year}
+          aria-label="Year Select"
+          onChange={onYearChange}
+          disabled={formData.model === ''}
+        >
+          <option>Select</option>
+          {
+            (state.brandModelYears.brandModelYears.get(getYearStorageKey(formData.brand, formData.model)) || []).map(year => <option value={year} key={year}>{year}</option>)
+          }
+        </Form.Select>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Trim</Form.Label>
         <Form.Select
           value={formData.trim}
           aria-label="Trim Select"
           onChange={onTrimChange}
-          disabled={formData.model === ''}
+          disabled={formData.year === ''}
         >
           <option>Select</option>
         </Form.Select>

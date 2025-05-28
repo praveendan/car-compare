@@ -3,6 +3,7 @@ import { API } from "../config";
 import { ServerException, VehicleBrandData } from "../types/api.types";
 import { AppAction } from "../context/action.types";
 import { AppState } from "../context/types";
+import { getYearStorageKey } from "../context/helpers";
 
 /**
  * 
@@ -74,6 +75,36 @@ export const loadAndSetModelData = async (brandName: string, state: AppState, di
         payload: {
           brand: brandName,
           models: []
+        }
+      })
+    }
+  }
+}
+
+export const loadAndSetModelYearData = async (brandName: string, model: string, state: AppState, dispatch: React.Dispatch<AppAction>) => {
+  if (!state.brandModelYears.brandModelYears.has(`${brandName}_${model}`)) {
+    try {
+      const resData = await axios.get(`${API}/api/years`, {
+        params: {
+          make: brandName,
+          make_model_id: model,
+        }
+      })
+      console.log(resData)
+
+      dispatch({
+        type: "ADD_YEARS",
+        payload: {
+          brandModel: getYearStorageKey(brandName, model),
+          years: resData.data
+        }
+      })
+    } catch (e: unknown) {
+      dispatch({
+        type: "ADD_YEARS",
+        payload: {
+          brandModel: getYearStorageKey(brandName, model),
+          years: []
         }
       })
     }
