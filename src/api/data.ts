@@ -3,7 +3,7 @@ import { API } from "../config";
 import { ServerException, VehicleBrandData } from "../types/api.types";
 import { AppAction } from "../context/action.types";
 import { AppState } from "../context/types";
-import { getYearStorageKey } from "../context/helpers";
+import { getTrimStorageKey, getYearStorageKey } from "../context/helpers";
 
 /**
  * 
@@ -18,10 +18,9 @@ export const getVehicleBrandData = async (): Promise<VehicleBrandData> => {
     }
   }
   try {
-    const resData = await axios.get(`${API}/api/makes`, {
+    const resData = await axios.get(`${API}/api/makes/v2`, {
       params: {
-        sort: 'name',
-        direction: 'asc'
+        sort: 'Makes.name'
       }
     })
 
@@ -56,7 +55,7 @@ export const getVehicleBrandData = async (): Promise<VehicleBrandData> => {
 export const loadAndSetModelData = async (brandName: string, state: AppState, dispatch: React.Dispatch<AppAction>) => {
   if (!state.brandModels.brandModels.has(brandName)) {
     try {
-      const resData = await axios.get(`${API}/api/models`, {
+      const resData = await axios.get(`${API}/api/models/v2`, {
         params: {
           make: brandName,
         }
@@ -82,15 +81,14 @@ export const loadAndSetModelData = async (brandName: string, state: AppState, di
 }
 
 export const loadAndSetModelYearData = async (brandName: string, model: string, state: AppState, dispatch: React.Dispatch<AppAction>) => {
-  if (!state.brandModelYears.brandModelYears.has(`${brandName}_${model}`)) {
+  if (!state.brandModelYears.brandModelYears.has(getYearStorageKey(brandName, model))) {
     try {
-      const resData = await axios.get(`${API}/api/years`, {
+      const resData = await axios.get(`${API}/api/years/v2`, {
         params: {
           make: brandName,
           make_model_id: model,
         }
       })
-      console.log(resData)
 
       dispatch({
         type: "ADD_YEARS",
