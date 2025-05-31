@@ -3,8 +3,8 @@ import Form from 'react-bootstrap/Form';
 import { Comparison } from './types';
 import { ChangeEvent, useContext } from 'react';
 import { GlobalContext } from '../../context/GlobalProvider';
-import { loadAndSetModelData, loadAndSetModelYearData } from '../../api/data';
-import { getYearStorageKey } from '../../context/helpers';
+import { loadAndSetModelData, loadAndSetModelYearData, loadAndSetModelYearTrimData } from '../../api/data';
+import { getTrimStorageKey, getYearStorageKey } from '../../context/helpers';
 
 const CarForm: React.FC<{
   index: number
@@ -32,7 +32,11 @@ const CarForm: React.FC<{
   }
 
   const onYearChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    updateFunction(index, { year: e.target.value })
+    const year = e.target.value
+    if (formData.brand !== '' && formData.model !== '' && year !== '') {
+      loadAndSetModelYearTrimData(formData.brand, formData.model, year, state, dispatch)
+    }
+    updateFunction(index, { year })
   }
 
   const onTrimChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -91,6 +95,9 @@ const CarForm: React.FC<{
           disabled={formData.year === ''}
         >
           <option>Select</option>
+          {
+            (state.brandModelYearTrims.brandModelYearTrims.get(getTrimStorageKey(formData.brand, formData.model, formData.year)) || []).map(trim => <option value={trim.id} key={trim.id}>{trim.description}</option>)
+          }
         </Form.Select>
       </Form.Group>
       <Button

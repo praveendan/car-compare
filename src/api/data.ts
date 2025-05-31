@@ -110,3 +110,34 @@ export const loadAndSetModelYearData = async (brandName: string, model: string, 
     }
   }
 }
+
+export const loadAndSetModelYearTrimData = async (brandName: string, model: string, year: string, state: AppState, dispatch: React.Dispatch<AppAction>) => {
+  if (!state.brandModelYearTrims.brandModelYearTrims.has(getTrimStorageKey(brandName, model, year))) {
+    try {
+      const resData = await axios.get(`${API}/api/trims/v2`, {
+        params: {
+          year,
+          make: brandName,
+          model_id: model,
+        }
+      })
+      console.log(resData.data.data)
+
+      dispatch({
+        type: "ADD_TRIM",
+        payload: {
+          brandModelYear: getTrimStorageKey(brandName, model, year),
+          trims: resData.data.data
+        }
+      })
+    } catch (e: unknown) {
+      dispatch({
+        type: "ADD_TRIM",
+        payload: {
+          brandModelYear: getTrimStorageKey(brandName, model, year),
+          trims: []
+        }
+      })
+    }
+  }
+}
