@@ -20,7 +20,12 @@ const CarForm: React.FC<{
     if (brand !== '') {
       loadAndSetModelData(brand, state, dispatch)
     }
-    updateFunction(index, { brand })
+    updateFunction(index, {
+      brand,
+      model: '',
+      year: '',
+      trim: ''
+    })
   }
 
   const onModelChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -28,7 +33,11 @@ const CarForm: React.FC<{
     if (formData.brand !== '' && model !== '') {
       loadAndSetModelYearData(formData.brand, model, state, dispatch)
     }
-    updateFunction(index, { model })
+    updateFunction(index, {
+      model,
+      year: '',
+      trim: ''
+    })
   }
 
   const onYearChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -36,7 +45,10 @@ const CarForm: React.FC<{
     if (formData.brand !== '' && formData.model !== '' && year !== '') {
       loadAndSetModelYearTrimData(formData.brand, formData.model, year, state, dispatch)
     }
-    updateFunction(index, { year })
+    updateFunction(index, {
+      year,
+      trim: ''
+    })
   }
 
   const onTrimChange = (e: ChangeEvent<HTMLSelectElement>) => {
