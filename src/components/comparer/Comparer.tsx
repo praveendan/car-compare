@@ -7,8 +7,9 @@ import { useContext, useEffect, useState } from 'react';
 import { Comparison } from './types';
 import { MAX_COMPARISONS } from '../../constants';
 import DetailsPane from './DetailsPane';
-import { getVehicleBrandData } from '../../api/data';
+import { getComprisons, getVehicleBrandData } from '../../api/data';
 import { GlobalContext } from '../../context/GlobalProvider';
+import { TrimSpecs } from '../../types/common.types';
 
 const DEFAULT_COMPARISON: Comparison = {
   brand: '',
@@ -17,9 +18,14 @@ const DEFAULT_COMPARISON: Comparison = {
   year: ''
 }
 
+const getIsDisabled = (comparisons: Comparison[]) => {
+  return comparisons.some(comparison => comparison.trim.trim() === '')
+}
+
 const Comparer: React.FC = () => {
   const { state, dispatch } = useContext(GlobalContext);
   const [comparisons, setComparisons] = useState<Comparison[]>([DEFAULT_COMPARISON, DEFAULT_COMPARISON])
+  const [comparisonData, setComparisonData] = useState<Map<string, TrimSpecs>>(new Map())
 
   const removeFunction = (index: number) => {
     const comparisonCopy = [...comparisons]
@@ -36,6 +42,11 @@ const Comparer: React.FC = () => {
     setComparisons(comparisonCopy)
   }
 
+  const loadComparisons = async() => {
+    const data = await getComprisons(comparisons.map(comparison => comparison.trim))
+    setComparisonData(data)
+  }
+
   useEffect(() => {
     const dataLoader = async () => {
       const data = await getVehicleBrandData()
@@ -46,6 +57,8 @@ const Comparer: React.FC = () => {
       dataLoader()
     }
   }, [dispatch, state.brands.brands.length])
+
+  console.log(comparisons)
 
   return (
     <Container>
@@ -84,11 +97,11 @@ const Comparer: React.FC = () => {
         </Col>
       </Row>
       <Row className="pb-2">
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" disabled={getIsDisabled(comparisons)} onClick={loadComparisons}>
           Compare
         </Button>
       </Row>
-      <DetailsPane comparisons={comparisons} />
+      <DetailsPane comparisons={comparisons} comparisonData={comparisonData} />
     </Container>
   );
 }

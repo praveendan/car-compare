@@ -4,6 +4,7 @@ import { ServerException, VehicleBrandData } from "../types/api.types";
 import { AppAction } from "../context/action.types";
 import { AppState } from "../context/types";
 import { getTrimStorageKey, getYearStorageKey } from "../context/helpers";
+import { TrimSpecs } from "../types/common.types";
 
 /**
  * 
@@ -137,5 +138,78 @@ export const loadAndSetModelYearTrimData = async (brandName: string, model: stri
         }
       })
     }
+  }
+}
+
+
+export const getComprisons = async (ids: string[]) => {
+  const trimSpecData = new Map<string, TrimSpecs>()
+
+  try {
+    const res = await Promise.all(ids.map(id => axios.get(`${API}/api/trims/v2/${id}`)))
+    res.forEach((item, i) => {
+      const data = item.data
+      const body = data.bodies[0]
+      const engine = data.engines[0]
+      const mileage = data.mileages[0]
+
+      const getMappedColors = (colors: { name: string; rgb: string; }[]) => {
+        return colors.map((col: { name: string; rgb: string; }) => {
+          return {
+            name: col.name,
+            rgb: col.rgb
+          }
+        })
+      }
+
+      const mappedData: TrimSpecs = {
+        body: {
+          curbWeight: body.curb_weight,
+          doors: body.doors,
+          grossWeight: body.gross_weight,
+          height: body.height,
+          length: body.length,
+          maxPayload: body.max_payload,
+          maxTowingCapacity: body.max_towing_capacity,
+          seats: body.seats,
+          type: body.type,
+          wheelBase: body.wheel_base
+        },
+        driveType: data.drive_types[0].description,
+        engine: {
+          camType: engine.cam_type,
+          cylinders: engine.cylinders,
+          engineType: engine.engine_type,
+          fuel: engine.fuel_type,
+          hp: engine.horsepower_hp,
+          hpRpm: engine.horsepower_rpm,
+          litres: engine.size
+        },
+        colors: getMappedColors(data.exterior_colors),
+        interiorColors: getMappedColors(data.interior_colors),
+        mileage: {
+          epaCity: mileage.epa_city_mpg,
+          epaHwy: mileage.epa_highway_mpg,
+          epaCombined: mileage.combined_mpg,
+          tankSize: mileage.fuel_tank_capacity,
+          cityRange: mileage.range_city,
+          hwyRange: mileage.range_highway,
+          epaCityE: mileage.epa_city_mpg_electric,
+          epaHwyE: mileage.epa_highway_mpg_electric,
+          epaCombinedE: mileage.epa_combined_mpg_electric,
+          batteryCapacity: mileage.battery_capacity_electric,
+          chargingTIme: mileage.epa_time_to_charge_hr_240v_electric
+        },
+        transmissions: data.transmissions.map((trans: { description: string; }) => trans.description)
+      }
+
+      trimSpecData.set(ids[i], mappedData)
+    })
+
+    console.log(res)
+  } catch (e) {
+    console.log(e)
+  } finally {
+    return trimSpecData
   }
 }
