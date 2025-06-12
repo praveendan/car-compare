@@ -58,8 +58,6 @@ const Comparer: React.FC = () => {
     }
   }, [dispatch, state.brands.brands.length])
 
-  console.log(comparisons)
-
   return (
     <Container>
       <Row>
