@@ -24,6 +24,7 @@ const getIsDisabled = (comparisons: Comparison[]) => {
 
 const Comparer: React.FC = () => {
   const { state, dispatch } = useContext(GlobalContext);
+  const [loading, setLoading] = useState(false)
   const [comparisons, setComparisons] = useState<Comparison[]>([DEFAULT_COMPARISON, DEFAULT_COMPARISON])
   const [comparisonData, setComparisonData] = useState<Map<string, TrimSpecs>>(new Map())
 
@@ -42,8 +43,10 @@ const Comparer: React.FC = () => {
     setComparisons(comparisonCopy)
   }
 
-  const loadComparisons = async() => {
+  const loadComparisons = async () => {
+    setLoading(true)
     const data = await getComprisons(comparisons.map(comparison => comparison.trim))
+    setLoading(false)
     setComparisonData(data)
   }
 
@@ -61,13 +64,24 @@ const Comparer: React.FC = () => {
   return (
     <Container>
       <Row>
-        <Col xs={12} md={6} lg={1} className="pb-2 border-top d-none d-lg-block"></Col>
+        <Col xs={2} md={2} lg={1} className="pb-2 border-top">
+          <Button
+            variant="primary"
+            type="submit"
+            className='w-100 h-100'
+            onClick={_ => {
+              const comparisonCopy = [...comparisons]
+              comparisonCopy.push(DEFAULT_COMPARISON)
+              setComparisons(comparisonCopy)
+            }}
+            disabled={comparisons.length === MAX_COMPARISONS}>+</Button>
+        </Col>
         {
           comparisons.map((_, index) => (
             <Col
               key={index}
-              xs={12}
-              md={6}
+              xs={true}
+              md={true}
               lg={true}
               className="pb-2 border-top"
             >
@@ -81,21 +95,9 @@ const Comparer: React.FC = () => {
             </Col>
           ))
         }
-        <Col xs={12} md={6} lg={1} className="pb-2 border-top">
-          <Button
-            variant="primary"
-            type="submit"
-            className='w-100 h-100'
-            onClick={_ => {
-              const comparisonCopy = [...comparisons]
-              comparisonCopy.push(DEFAULT_COMPARISON)
-              setComparisons(comparisonCopy)
-            }}
-            disabled={comparisons.length === MAX_COMPARISONS}>+</Button>
-        </Col>
       </Row>
       <Row className="pb-2">
-        <Button variant="primary" type="submit" disabled={getIsDisabled(comparisons)} onClick={loadComparisons}>
+        <Button variant="primary" type="submit" disabled={getIsDisabled(comparisons) || loading} onClick={loadComparisons}>
           Compare
         </Button>
       </Row>

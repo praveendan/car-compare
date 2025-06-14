@@ -1,11 +1,12 @@
 import { Row, Col } from "react-bootstrap"
 import { Comparison } from "./types"
-import { TrimSpecs } from "../../types/common.types"
+import { Color, TrimSpecs } from "../../types/common.types"
+import React from "react"
 
 const TableLabel: React.FC<{ text: String }> = ({ text }) => {
   return (
-    <Col xs={2} md={2} lg={1} className="pb-2 border">
-      <p className="small">{text}</p>
+    <Col xs={2} md={2} lg={1} className="border d-flex align-items-center">
+      <p className="small m-0">{text}</p>
     </Col>
   )
 }
@@ -14,7 +15,13 @@ const ComparisonItems: React.FC<{
   keys: string[]
   comparisons: Comparison[]
   comparisonData: Map<string, TrimSpecs>
-}> = ({ keys, comparisons, comparisonData }) => {
+  children?: React.ReactNode
+}> = ({
+  keys,
+  comparisons,
+  comparisonData,
+  children
+}) => {
 
   const getItem = (trimSpecs: TrimSpecs | undefined) => {
     if (!trimSpecs) return ''
@@ -33,16 +40,51 @@ const ComparisonItems: React.FC<{
         comparisons.map((comparison, index) => (
           <Col
             key={index}
-            xs={5}
-            md={5}
+            xs={true}
+            md={true}
             lg={true}
-            className="pb-2 border"
+            className="border  d-flex align-items-center"
           >
             {getItem(comparisonData.get(comparison.trim))}
+            {children}
           </Col>
         ))
       }
     </>
+  )
+}
+
+
+const ColorBoxContainer: React.FC<{ colors: Color[] }> = ({ colors }) => {
+  return (
+    <div className="d-flex">
+      {
+        colors.map(color => (<ColorBox color={color} />))
+      }
+    </div>
+  )
+}
+
+const ColorBox: React.FC<{ color: Color }> = ({ color }) => {
+  return (
+    <div title={color.name} style={{
+      width: '24px',
+      height: '24px',
+      backgroundColor: 'white',
+      borderRadius: '6px',
+      border: '1px solid black',
+      padding: '1px',
+      margin: '1px'
+    }}>
+      <div style={{
+        width: '20px',
+        height: '20px',
+        backgroundColor: `rgb(${color.rgb})`,
+        borderRadius: '5px',
+        border: '1px solid black',
+        padding: 0
+      }}></div>
+    </div>
   )
 }
 
@@ -55,7 +97,7 @@ const DetailsPane: React.FC<{
     <>
       <Row>
         <TableLabel text='Curb Weight' />
-        <ComparisonItems keys={['body', 'curbWeight']} comparisons={comparisons} comparisonData={comparisonData}/>
+        <ComparisonItems keys={['body', 'curbWeight']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
       <Row>
         <TableLabel text='Gross Weight' />
@@ -137,12 +179,37 @@ const DetailsPane: React.FC<{
         <TableLabel text='EPA Combined (Electric)' />
         <ComparisonItems keys={['mileage', 'epaCombinedE']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
-      {
-
-      }
+      <Row>
+        <TableLabel text='Colors' />
+        {
+          comparisons.map((comparison, index) => (
+            <Col
+              key={index}
+              xs={true}
+              md={true}
+              lg={true}
+              className="border d-flex align-items-center"
+            >
+              <ColorBoxContainer colors={comparisonData.get(comparison.trim)?.colors || []} />
+            </Col>
+          ))
+        }
+      </Row>
       <Row>
         <TableLabel text='Transmissions' />
-        <ComparisonItems keys={['transmissions']} comparisons={comparisons} comparisonData={comparisonData} />
+        {
+          comparisons.map((comparison, index) => (
+            <Col
+              key={index}
+              xs={true}
+              md={true}
+              lg={true}
+              className="border"
+            >
+              {comparisonData.get(comparison.trim)?.transmissions.join(',')}
+            </Col>
+          ))
+        }
       </Row>
     </>
   )

@@ -120,7 +120,6 @@ export const loadAndSetModelYearTrimData = async (brandName: string, model: stri
           model_id: model,
         }
       })
-      console.log(resData.data.data)
 
       dispatch({
         type: "ADD_TRIM",
@@ -206,7 +205,6 @@ export const getComprisons = async (ids: string[]) => {
       trimSpecData.set(ids[i], mappedData)
     })
 
-    console.log(res)
   } catch (e) {
     console.log(e)
   } finally {

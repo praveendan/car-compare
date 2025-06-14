@@ -15,7 +15,7 @@ export interface Trim extends Common {
   invoice: string
 }
 
-type Color = {
+export type Color = {
   name: string
   rgb: string
 }
