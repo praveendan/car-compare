@@ -23,14 +23,4 @@ const ColorBox: React.FC<{ color: Color }> = ({ color }) => {
   )
 }
 
-const ColorBoxContainer: React.FC<{ colors: Color[] }> = ({ colors }) => {
-  return (
-    <div className="d-flex">
-      {
-        colors.map(color => (<ColorBox color={color} />))
-      }
-    </div>
-  )
-}
-
-export default ColorBoxContainer
+export default ColorBox

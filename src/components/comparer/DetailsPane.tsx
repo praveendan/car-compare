@@ -4,7 +4,7 @@ import { TrimSpecs } from "../../types/common.types"
 import React from "react"
 import TableLabel from "./TableLabel"
 import ComparisonItems from "./ComparisonItems"
-import ColorBoxContainer from "./ColorBoxContainer"
+import ColorBox from "./ColorBox"
 
 const DetailsPane: React.FC<{
   comparisons: Comparison[]
@@ -106,9 +106,29 @@ const DetailsPane: React.FC<{
               xs={true}
               md={true}
               lg={true}
-              className="border d-flex align-items-center"
+              className="border d-flex align-items-center flex-wrap"
             >
-              <ColorBoxContainer colors={comparisonData.get(comparison.trim)?.colors || []} />
+              {
+                (comparisonData.get(comparison.trim)?.colors || []).map(color => (<ColorBox color={color} />))
+              }
+            </Col>
+          ))
+        }
+      </Row>
+      <Row>
+        <TableLabel text='Interior Colors' />
+        {
+          comparisons.map((comparison, index) => (
+            <Col
+              key={index}
+              xs={true}
+              md={true}
+              lg={true}
+              className="border d-flex align-items-center flex-wrap"
+            >
+              {
+                (comparisonData.get(comparison.trim)?.interiorColors || []).map(color => (<ColorBox color={color} />))
+              }
             </Col>
           ))
         }
