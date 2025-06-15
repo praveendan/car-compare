@@ -1,92 +1,10 @@
 import { Row, Col } from "react-bootstrap"
 import { Comparison } from "./types"
-import { Color, TrimSpecs } from "../../types/common.types"
+import { TrimSpecs } from "../../types/common.types"
 import React from "react"
-
-const TableLabel: React.FC<{ text: String }> = ({ text }) => {
-  return (
-    <Col xs={2} md={2} lg={1} className="border d-flex align-items-center">
-      <p className="small m-0">{text}</p>
-    </Col>
-  )
-}
-
-const ComparisonItems: React.FC<{
-  keys: string[]
-  comparisons: Comparison[]
-  comparisonData: Map<string, TrimSpecs>
-  children?: React.ReactNode
-}> = ({
-  keys,
-  comparisons,
-  comparisonData,
-  children
-}) => {
-
-  const getItem = (trimSpecs: TrimSpecs | undefined) => {
-    if (!trimSpecs) return ''
-
-    let data: any = trimSpecs
-
-    keys.forEach(key => {
-      data = data[key]
-    })
-    return data
-  }
-
-  return (
-    <>
-      {
-        comparisons.map((comparison, index) => (
-          <Col
-            key={index}
-            xs={true}
-            md={true}
-            lg={true}
-            className="border  d-flex align-items-center"
-          >
-            {getItem(comparisonData.get(comparison.trim))}
-            {children}
-          </Col>
-        ))
-      }
-    </>
-  )
-}
-
-
-const ColorBoxContainer: React.FC<{ colors: Color[] }> = ({ colors }) => {
-  return (
-    <div className="d-flex">
-      {
-        colors.map(color => (<ColorBox color={color} />))
-      }
-    </div>
-  )
-}
-
-const ColorBox: React.FC<{ color: Color }> = ({ color }) => {
-  return (
-    <div title={color.name} style={{
-      width: '24px',
-      height: '24px',
-      backgroundColor: 'white',
-      borderRadius: '6px',
-      border: '1px solid black',
-      padding: '1px',
-      margin: '1px'
-    }}>
-      <div style={{
-        width: '20px',
-        height: '20px',
-        backgroundColor: `rgb(${color.rgb})`,
-        borderRadius: '5px',
-        border: '1px solid black',
-        padding: 0
-      }}></div>
-    </div>
-  )
-}
+import TableLabel from "./TableLabel"
+import ComparisonItems from "./ComparisonItems"
+import ColorBoxContainer from "./ColorBoxContainer"
 
 const DetailsPane: React.FC<{
   comparisons: Comparison[]
