@@ -1,0 +1,18 @@
+.swatch_container {
+  width: 24px;
+  height: 24px;
+  background-color: white;
+  border-radius: 6px;
+  border: 1px solid black;
+  padding: 1px;
+  margin: 1px;
+}
+
+.swatch {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 0;
+}

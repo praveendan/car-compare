@@ -5,6 +5,7 @@ import React from "react"
 import TableLabel from "./TableLabel"
 import ComparisonItems from "./ComparisonItems"
 import ColorBox from "./ColorBox"
+import styles from './detailsPane.module.css'
 
 const DetailsPane: React.FC<{
   comparisons: Comparison[]
@@ -45,7 +46,7 @@ const DetailsPane: React.FC<{
         <TableLabel text='WheelBase' />
         <ComparisonItems keys={['body', 'wheelBase']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
-      <Row>
+      <Row className={styles.nth_row}>
         <TableLabel text='Drive Type' />
         <ComparisonItems keys={['driveType']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
@@ -73,27 +74,27 @@ const DetailsPane: React.FC<{
         <TableLabel text='Engine Capacity' />
         <ComparisonItems keys={['engine', 'litres']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
-      <Row>
+      <Row className={styles.nth_row}>
         <TableLabel text='EPA Highway' />
         <ComparisonItems keys={['mileage', 'epaHwy']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
-      <Row>
+      <Row className={styles.nth_row}>
         <TableLabel text='EPA City' />
         <ComparisonItems keys={['mileage', 'epaCity']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
-      <Row>
+      <Row className={styles.nth_row}>
         <TableLabel text='EPA Combined' />
         <ComparisonItems keys={['mileage', 'epaCombined']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
-      <Row>
+      <Row className={styles.nth_row}>
         <TableLabel text='EPA Highway (Electric)' />
         <ComparisonItems keys={['mileage', 'epaHwyE']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
-      <Row>
+      <Row className={styles.nth_row}>
         <TableLabel text='EPA City (Electric)' />
         <ComparisonItems keys={['mileage', 'epaCityE']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
-      <Row>
+      <Row className={styles.nth_row}>
         <TableLabel text='EPA Combined (Electric)' />
         <ComparisonItems keys={['mileage', 'epaCombinedE']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
@@ -115,7 +116,7 @@ const DetailsPane: React.FC<{
           ))
         }
       </Row>
-      <Row>
+      <Row className={styles.nth_row}>
         <TableLabel text='Interior Colors' />
         {
           comparisons.map((comparison, index) => (
