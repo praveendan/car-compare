@@ -62,9 +62,9 @@ const Comparer: React.FC = () => {
   }, [dispatch, state.brands.brands.length])
 
   return (
-    <Container>
+    <Container className='mt-3'>
       <Row>
-        <Col xs={2} md={2} lg={1} className="pb-2 border-top">
+        <Col xs={2} md={2} lg={1} className="pb-2">
           <Button
             variant="primary"
             type="submit"
@@ -83,7 +83,7 @@ const Comparer: React.FC = () => {
               xs={true}
               md={true}
               lg={true}
-              className="pb-2 border-top"
+              className="pb-2"
             >
               <CarForm
                 index={index}
