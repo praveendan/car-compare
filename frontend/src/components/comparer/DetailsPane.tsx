@@ -15,36 +15,36 @@ const DetailsPane: React.FC<{
   return (
     <>
       <Row>
-        <TableLabel text='Curb Weight(lb)' />
-        <ComparisonItems keys={['body', 'curbWeight']} comparisons={comparisons} comparisonData={comparisonData} />
+        <TableLabel text='Curb Weight' />
+        <ComparisonItems keys={['body', 'curbWeight']} comparisons={comparisons} comparisonData={comparisonData} postFix="lb"/>
       </Row>
       <Row>
-        <TableLabel text='Gross Weight(lb)' />
-        <ComparisonItems keys={['body', 'grossWeight']} comparisons={comparisons} comparisonData={comparisonData} />
+        <TableLabel text='Gross Weight' />
+        <ComparisonItems keys={['body', 'grossWeight']} comparisons={comparisons} comparisonData={comparisonData} postFix="lb" />
       </Row>
       <Row>
-        <TableLabel text='Height(in)' />
-        <ComparisonItems keys={['body', 'height']} comparisons={comparisons} comparisonData={comparisonData} />
+        <TableLabel text='Height' />
+        <ComparisonItems keys={['body', 'height']} comparisons={comparisons} comparisonData={comparisonData} postFix="in" />
       </Row>
       <Row>
-        <TableLabel text='Length(in)' />
-        <ComparisonItems keys={['body', 'length']} comparisons={comparisons} comparisonData={comparisonData} />
+        <TableLabel text='Length' />
+        <ComparisonItems keys={['body', 'length']} comparisons={comparisons} comparisonData={comparisonData} postFix="in" />
       </Row>
       <Row>
-        <TableLabel text='Max Payload(lb)' />
-        <ComparisonItems keys={['body', 'maxPayload']} comparisons={comparisons} comparisonData={comparisonData} />
+        <TableLabel text='Max Payload' />
+        <ComparisonItems keys={['body', 'maxPayload']} comparisons={comparisons} comparisonData={comparisonData} postFix="lb" />
       </Row>
       <Row>
-        <TableLabel text='Max Towing Capacity(lb)' />
-        <ComparisonItems keys={['body', 'maxTowingCapacity']} comparisons={comparisons} comparisonData={comparisonData} />
+        <TableLabel text='Max Towing Capacity' />
+        <ComparisonItems keys={['body', 'maxTowingCapacity']} comparisons={comparisons} comparisonData={comparisonData} postFix="lb" />
       </Row>
       <Row>
         <TableLabel text='Doors' />
         <ComparisonItems keys={['body', 'doors']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
       <Row>
-        <TableLabel text='WheelBase(in)' />
-        <ComparisonItems keys={['body', 'wheelBase']} comparisons={comparisons} comparisonData={comparisonData} />
+        <TableLabel text='WheelBase' />
+        <ComparisonItems keys={['body', 'wheelBase']} comparisons={comparisons} comparisonData={comparisonData} postFix="in" />
       </Row>
       <Row className={styles.nth_row}>
         <TableLabel text='Drive Type' />
@@ -71,31 +71,31 @@ const DetailsPane: React.FC<{
         <ComparisonItems keys={['engine', 'hp']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
       <Row>
-        <TableLabel text='Engine Capacity(l)' />
-        <ComparisonItems keys={['engine', 'litres']} comparisons={comparisons} comparisonData={comparisonData} />
+        <TableLabel text='Engine Capacity' />
+        <ComparisonItems keys={['engine', 'litres']} comparisons={comparisons} comparisonData={comparisonData} postFix="l" />
       </Row>
       <Row className={styles.nth_row}>
         <TableLabel text='EPA Highway' />
-        <ComparisonItems keys={['mileage', 'epaHwy']} comparisons={comparisons} comparisonData={comparisonData} />
+        <ComparisonItems keys={['mileage', 'epaHwy']} comparisons={comparisons} comparisonData={comparisonData} postFix="mpg" />
       </Row>
       <Row className={styles.nth_row}>
-        <TableLabel text='EPA City(miles)' />
-        <ComparisonItems keys={['mileage', 'epaCity']} comparisons={comparisons} comparisonData={comparisonData} />
+        <TableLabel text='EPA City' />
+        <ComparisonItems keys={['mileage', 'epaCity']} comparisons={comparisons} comparisonData={comparisonData} postFix="mpg" />
       </Row>
       <Row className={styles.nth_row}>
-        <TableLabel text='EPA Combined(miles)' />
-        <ComparisonItems keys={['mileage', 'epaCombined']} comparisons={comparisons} comparisonData={comparisonData} />
+        <TableLabel text='EPA Combined' />
+        <ComparisonItems keys={['mileage', 'epaCombined']} comparisons={comparisons} comparisonData={comparisonData} postFix="mpg" />
       </Row>
       <Row className={styles.nth_row}>
-        <TableLabel text='EPA Highway (Electric-miles)' />
+        <TableLabel text='EPA Highway (Electric)' />
         <ComparisonItems keys={['mileage', 'epaHwyE']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
       <Row className={styles.nth_row}>
-        <TableLabel text='EPA City (Electric-miles)' />
+        <TableLabel text='EPA City (Electric)' />
         <ComparisonItems keys={['mileage', 'epaCityE']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
       <Row className={styles.nth_row}>
-        <TableLabel text='EPA Combined (Electric-miles)' />
+        <TableLabel text='EPA Combined (Electric)' />
         <ComparisonItems keys={['mileage', 'epaCombinedE']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
       <Row>

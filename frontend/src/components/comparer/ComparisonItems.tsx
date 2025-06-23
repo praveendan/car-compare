@@ -6,12 +6,12 @@ const ComparisonItems: React.FC<{
   keys: string[]
   comparisons: Comparison[]
   comparisonData: Map<string, TrimSpecs>
-  children?: React.ReactNode
+  postFix?: string
 }> = ({
   keys,
   comparisons,
   comparisonData,
-  children
+  postFix
 }) => {
   const getItem = (trimSpecs: TrimSpecs | undefined) => {
     if (!trimSpecs) return ''
@@ -27,18 +27,18 @@ const ComparisonItems: React.FC<{
   return (
     <>
       {
-        comparisons.map((comparison, index) => (
-          <Col
-            key={index}
-            xs={true}
-            md={true}
-            lg={true}
-            className="border d-flex align-items-center text-wrap text-truncate"
-          >
-            {getItem(comparisonData.get(comparison.trim))}
-            {children}
-          </Col>
-        ))
+        comparisons.map((comparison, index) => {
+          const data = getItem(comparisonData.get(comparison.trim))
+          return (
+            <Col
+              key={index}
+              xs={true}
+              md={true}
+              lg={true}
+              className="border d-flex align-items-center text-wrap text-truncate"
+            >{data} {!data? '': postFix}</Col>
+          )
+        })
       }
     </>
   )
