@@ -15,27 +15,27 @@ const DetailsPane: React.FC<{
   return (
     <>
       <Row>
-        <TableLabel text='Curb Weight' />
+        <TableLabel text='Curb Weight(lb)' />
         <ComparisonItems keys={['body', 'curbWeight']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
       <Row>
-        <TableLabel text='Gross Weight' />
+        <TableLabel text='Gross Weight(lb)' />
         <ComparisonItems keys={['body', 'grossWeight']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
       <Row>
-        <TableLabel text='Height' />
+        <TableLabel text='Height(in)' />
         <ComparisonItems keys={['body', 'height']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
       <Row>
-        <TableLabel text='Length' />
+        <TableLabel text='Length(in)' />
         <ComparisonItems keys={['body', 'length']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
       <Row>
-        <TableLabel text='Max Payload' />
+        <TableLabel text='Max Payload(lb)' />
         <ComparisonItems keys={['body', 'maxPayload']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
       <Row>
-        <TableLabel text='Max Towing Capacity' />
+        <TableLabel text='Max Towing Capacity(lb)' />
         <ComparisonItems keys={['body', 'maxTowingCapacity']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
       <Row>
@@ -43,7 +43,7 @@ const DetailsPane: React.FC<{
         <ComparisonItems keys={['body', 'doors']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
       <Row>
-        <TableLabel text='WheelBase' />
+        <TableLabel text='WheelBase(in)' />
         <ComparisonItems keys={['body', 'wheelBase']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
       <Row className={styles.nth_row}>
@@ -71,7 +71,7 @@ const DetailsPane: React.FC<{
         <ComparisonItems keys={['engine', 'hp']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
       <Row>
-        <TableLabel text='Engine Capacity' />
+        <TableLabel text='Engine Capacity(l)' />
         <ComparisonItems keys={['engine', 'litres']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
       <Row className={styles.nth_row}>
@@ -79,23 +79,23 @@ const DetailsPane: React.FC<{
         <ComparisonItems keys={['mileage', 'epaHwy']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
       <Row className={styles.nth_row}>
-        <TableLabel text='EPA City' />
+        <TableLabel text='EPA City(miles)' />
         <ComparisonItems keys={['mileage', 'epaCity']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
       <Row className={styles.nth_row}>
-        <TableLabel text='EPA Combined' />
+        <TableLabel text='EPA Combined(miles)' />
         <ComparisonItems keys={['mileage', 'epaCombined']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
       <Row className={styles.nth_row}>
-        <TableLabel text='EPA Highway (Electric)' />
+        <TableLabel text='EPA Highway (Electric-miles)' />
         <ComparisonItems keys={['mileage', 'epaHwyE']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
       <Row className={styles.nth_row}>
-        <TableLabel text='EPA City (Electric)' />
+        <TableLabel text='EPA City (Electric-miles)' />
         <ComparisonItems keys={['mileage', 'epaCityE']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
       <Row className={styles.nth_row}>
-        <TableLabel text='EPA Combined (Electric)' />
+        <TableLabel text='EPA Combined (Electric-miles)' />
         <ComparisonItems keys={['mileage', 'epaCombinedE']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
       <Row>
@@ -143,7 +143,7 @@ const DetailsPane: React.FC<{
               xs={true}
               md={true}
               lg={true}
-              className="border"
+              className="border d-flex align-items-center text-wrap text-truncate"
             >
               {comparisonData.get(comparison.trim)?.transmissions.join(',')}
             </Col>
