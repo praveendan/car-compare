@@ -64,11 +64,11 @@ const Comparer: React.FC = () => {
   return (
     <Container className='mt-3'>
       <Row>
-        <Col xs={2} md={2} lg={1} className="pb-2">
+        <Col xs={2} md={2} lg={2} className="pb-2 px-0 px-sm-1 px-md-2 col-lg-2 col-md-2 col-2 d-flex justify-content-center align-items-center">
           <Button
             variant="primary"
             type="submit"
-            className='w-100 h-100'
+            className='btn btn-primary btn-lg'
             onClick={_ => {
               const comparisonCopy = [...comparisons]
               comparisonCopy.push(DEFAULT_COMPARISON)
@@ -83,7 +83,7 @@ const Comparer: React.FC = () => {
               xs={true}
               md={true}
               lg={true}
-              className="pb-2"
+              className="pb-2 px-0 px-sm-1 px-md-2"
             >
               <CarForm
                 index={index}

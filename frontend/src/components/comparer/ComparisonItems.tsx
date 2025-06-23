@@ -33,7 +33,7 @@ const ComparisonItems: React.FC<{
             xs={true}
             md={true}
             lg={true}
-            className="border  d-flex align-items-center"
+            className="border d-flex align-items-center text-wrap text-truncate"
           >
             {getItem(comparisonData.get(comparison.trim))}
             {children}
