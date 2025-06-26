@@ -4,6 +4,7 @@ import CarApi from './src/CarApi.js'
 import exception from './src/Exception.js'
 import { validateSignature } from './src/middleware/auth.js'
 import { pathWhitelistMiddleware } from './src/middleware/path.js'
+import { rateLimiter } from './src/middleware/rateLimiter.js'
 
 const app = express()
 const port = process.env.NODE_ENV == 'test' ? 0 : 3000
@@ -41,6 +42,8 @@ app.get('/proxy/api/*', validateSignature, pathWhitelistMiddleware, (req, res) =
             )
         })
 })
+
+app.use(rateLimiter)
 
 app.use((req, res) => {
     res.status(404).json(exception(req, 'NotFound', 'Route not found', 404))
