@@ -58,7 +58,7 @@ const DetailsPane: React.FC<{
         <ComparisonItems keys={['engine', 'cylinders']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
       <Row>
-        <TableLabel text='cylinders' />
+        <TableLabel text='Engine type' />
         <ComparisonItems keys={['engine', 'engineType']} comparisons={comparisons} comparisonData={comparisonData} />
       </Row>
       <Row>
