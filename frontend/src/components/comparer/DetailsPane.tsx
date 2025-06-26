@@ -128,7 +128,7 @@ const DetailsPane: React.FC<{
               className="border d-flex align-items-center flex-wrap"
             >
               {
-                (comparisonData.get(comparison.trim)?.interiorColors || []).map(color => (<ColorBox color={color} />))
+                (comparisonData.get(comparison.trim)?.interiorColors || []).map(color => (<ColorBox key={color.rgb} color={color} />))
               }
             </Col>
           ))
