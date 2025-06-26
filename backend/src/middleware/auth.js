@@ -3,7 +3,7 @@ import exception from '../Exception.js'
 
 const MAX_DRIFT = 5 * 60 * 1000 //  5 min
 
-export function validateSignature(req, res, next) {
+export const validateSignature = (req, res, next) => {
   const timestamp = req.headers['x-timestamp'];
   const signature = req.headers['x-signature'];
 
