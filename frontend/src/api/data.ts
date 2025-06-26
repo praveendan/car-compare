@@ -5,6 +5,7 @@ import { AppAction } from "../context/action.types";
 import { AppState } from "../context/types";
 import { getTrimStorageKey, getYearStorageKey } from "../context/helpers";
 import { TrimSpecs } from "../types/common.types";
+import { generateHmacSignature } from "./generateHmacSignature";
 
 /**
  * 
@@ -19,7 +20,13 @@ export const getVehicleBrandData = async (): Promise<VehicleBrandData> => {
     }
   }
   try {
+    const { timestamp, signature } = generateHmacSignature(process.env.REACT_APP_SECRET!);
+
     const resData = await axios.get(`${API}/api/makes/v2`, {
+      headers: {
+        'x-signature': signature,
+        'x-timestamp': timestamp
+      },
       params: {
         sort: 'Makes.name'
       }
@@ -56,7 +63,13 @@ export const getVehicleBrandData = async (): Promise<VehicleBrandData> => {
 export const loadAndSetModelData = async (brandName: string, state: AppState, dispatch: React.Dispatch<AppAction>) => {
   if (!state.brandModels.brandModels.has(brandName)) {
     try {
+      const { timestamp, signature } = generateHmacSignature(process.env.REACT_APP_SECRET!);
+
       const resData = await axios.get(`${API}/api/models/v2`, {
+        headers: {
+          'x-signature': signature,
+          'x-timestamp': timestamp
+        },
         params: {
           make: brandName,
         }
@@ -84,7 +97,13 @@ export const loadAndSetModelData = async (brandName: string, state: AppState, di
 export const loadAndSetModelYearData = async (brandName: string, model: string, state: AppState, dispatch: React.Dispatch<AppAction>) => {
   if (!state.brandModelYears.brandModelYears.has(getYearStorageKey(brandName, model))) {
     try {
+      const { timestamp, signature } = generateHmacSignature(process.env.REACT_APP_SECRET!);
+
       const resData = await axios.get(`${API}/api/years/v2`, {
+        headers: {
+          'x-signature': signature,
+          'x-timestamp': timestamp
+        },
         params: {
           make: brandName,
           make_model_id: model,
@@ -113,7 +132,13 @@ export const loadAndSetModelYearData = async (brandName: string, model: string, 
 export const loadAndSetModelYearTrimData = async (brandName: string, model: string, year: string, state: AppState, dispatch: React.Dispatch<AppAction>) => {
   if (!state.brandModelYearTrims.brandModelYearTrims.has(getTrimStorageKey(brandName, model, year))) {
     try {
+      const { timestamp, signature } = generateHmacSignature(process.env.REACT_APP_SECRET!);
+
       const resData = await axios.get(`${API}/api/trims/v2`, {
+        headers: {
+          'x-signature': signature,
+          'x-timestamp': timestamp
+        },
         params: {
           year,
           make: brandName,
@@ -145,7 +170,14 @@ export const getComprisons = async (ids: string[]) => {
   const trimSpecData = new Map<string, TrimSpecs>()
 
   try {
-    const res = await Promise.all(ids.map(id => axios.get(`${API}/api/trims/v2/${id}`)))
+    const { timestamp, signature } = generateHmacSignature(process.env.REACT_APP_SECRET!);
+
+    const res = await Promise.all(ids.map(id => axios.get(`${API}/api/trims/v2/${id}`, {
+      headers: {
+        'x-signature': signature,
+        'x-timestamp': timestamp
+      }
+    })))
     res.forEach((item, i) => {
       const data = item.data
       const body = data.bodies[0]

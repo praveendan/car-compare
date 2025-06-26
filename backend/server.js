@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import CarApi from './src/CarApi.js'
 import exception from './src/Exception.js'
+import { validateSignature } from './src/middleware/auth.js'
 
 const app = express()
 const port = process.env.NODE_ENV == 'test' ? 0 : 3000
@@ -21,7 +22,7 @@ app.get('/health', (req, res) => {
     res.status(200).json({ msg: 'ok' })
 })
 
-app.get('/proxy/api/*', (req, res) => {
+app.get('/proxy/api/*', validateSignature, (req, res) => {
     if (req.path === '/proxy/api' || req.path === '/proxy/api/') {
         res.status(404).json(exception(req, 'NotFound', 'Route not found', 404))
         return
