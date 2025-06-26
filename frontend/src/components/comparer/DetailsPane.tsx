@@ -11,7 +11,6 @@ const DetailsPane: React.FC<{
   comparisons: Comparison[]
   comparisonData: Map<string, TrimSpecs>
 }> = ({ comparisons, comparisonData }) => {
-  console.log(comparisonData)
   return (
     <>
       <Row>
