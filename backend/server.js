@@ -14,7 +14,7 @@ carApi.check()
 
 app.use(
     cors({
-        origin: process.env.CORS_ORIGIN || null
+        origin: [process.env.CORS_ORIGIN]
     })
 )
 
