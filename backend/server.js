@@ -13,10 +13,15 @@ const carApi = new CarApi()
 carApi.check()
 
 app.use(
-    cors({
-        origin: [process.env.CORS_ORIGIN]
-    })
+  cors({
+    origin: process.env.CORS_ORIGIN,
+    credentials: true,
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-signature', 'x-timestamp']
+  })
 )
+
+app.options('*', cors()) // Handle preflight
 
 app.use(express.static('public'))
 
