@@ -1,5 +1,4 @@
 import axios from "axios";
-import { API } from "../config";
 import { ServerException, VehicleBrandData } from "../types/api.types";
 import { AppAction } from "../context/action.types";
 import { AppState } from "../context/types";
@@ -7,6 +6,7 @@ import { getTrimStorageKey, getYearStorageKey } from "../context/helpers";
 import { TrimSpecs } from "../types/common.types";
 import { generateHmacSignature } from "./generateHmacSignature";
 
+const API = process.env.REACT_APP_SECRET!
 /**
  * 
  * @returns brands
