@@ -6,7 +6,8 @@ import { getTrimStorageKey, getYearStorageKey } from "../context/helpers";
 import { TrimSpecs } from "../types/common.types";
 import { generateHmacSignature } from "./generateHmacSignature";
 
-const API = process.env.HOST!
+const API = process.env.REACT_APP_API_URL!
+
 /**
  * 
  * @returns brands
