@@ -7,7 +7,7 @@ import { pathWhitelistMiddleware } from './src/middleware/path.js'
 import { rateLimiter } from './src/middleware/rateLimiter.js'
 
 const app = express()
-const port = process.env.NODE_ENV == 'test' ? 0 : 3000
+const port = process.env.NODE_ENV == 'test' ? 0 : 5000
 
 const carApi = new CarApi()
 carApi.check()
