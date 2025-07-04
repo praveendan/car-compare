@@ -1,5 +1,7 @@
 import express from 'express'
 import cors from 'cors'
+import { fileURLToPath } from 'url';
+import path, { dirname } from 'path';
 import CarApi from './src/CarApi.js'
 import exception from './src/Exception.js'
 import { validateSignature } from './src/middleware/auth.js'
@@ -8,6 +10,9 @@ import { rateLimiter } from './src/middleware/rateLimiter.js'
 
 const app = express()
 const port = process.env.NODE_ENV == 'test' ? 0 : 5000
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const carApi = new CarApi()
 carApi.check()
@@ -23,7 +28,7 @@ app.use(
 
 app.options('*', cors()) // Handle preflight
 
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, '../frontend/build')))
 
 app.get('/health', (req, res) => {
     res.status(200).json({ msg: 'ok' })
@@ -47,6 +52,10 @@ app.get('/proxy/api/*', validateSignature, pathWhitelistMiddleware, (req, res) =
             )
         })
 })
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+});
 
 app.use(rateLimiter)
 
