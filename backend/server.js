@@ -7,7 +7,7 @@ import { pathWhitelistMiddleware } from './src/middleware/path.js'
 import { rateLimiter } from './src/middleware/rateLimiter.js'
 
 const app = express()
-const port = process.env.NODE_ENV == 'test' ? 0 : 5000
+const port = process.env.NODE_ENV == 'test' ? 0 : process.env.PORT
 
 const carApi = new CarApi()
 carApi.check()
@@ -54,6 +54,6 @@ app.use((req, res) => {
     res.status(404).json(exception(req, 'NotFound', 'Route not found', 404))
 })
 
-app.listen(port, () => console.log('Server running on port 3000'))
+app.listen(port, () => console.log(`Server running on port ${process.env.PORT}`))
 
 export default app
