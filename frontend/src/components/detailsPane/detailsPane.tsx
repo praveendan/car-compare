@@ -2,9 +2,9 @@ import { Row, Col, Card } from "react-bootstrap"
 import { Comparison } from "../table/types"
 import { TrimSpecs } from "../../types/common.types"
 import React from "react"
-import TableLabel from "../table/TableLabel"
-import ComparisonItems from "../table/ComparisonItems"
-import ColorBox from "../table/ColorBox"
+import TableLabel from "../table/tableLabel"
+import ComparisonItems from "../table/comparisonItems"
+import ColorBox from "../table/colorBox"
 import styles from './detailsPane.module.css'
 import CustomRow from "../../ui/customRow"
 

@@ -1,10 +1,10 @@
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import CarForm from '../components/form/CarForm';
+import CarForm from '../components/form/carForm';
 import { useContext, useEffect, useState } from 'react';
 import { Comparison } from '../components/table/types';
-import DetailsPane from '../components/detailsPane/DetailsPane';
+import DetailsPane from '../components/detailsPane/detailsPane';
 import { getComprisons, getVehicleBrandData } from '../api/data';
 import { GlobalContext } from '../context/GlobalProvider';
 import { TrimSpecs } from '../types/common.types';
