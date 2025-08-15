@@ -1,6 +1,6 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import Comparer from './comparer/Comparer';
+import Comparer from '../pages/Comparer';
 import { GlobalProvider } from '../context/GlobalProvider';
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -53,11 +53,11 @@ const Dashboard = () => {
     <GlobalProvider>
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
-          <Navbar.Brand href="#home">Car-Compare</Navbar.Brand>
+          <Navbar.Brand href="#home">CC</Navbar.Brand>
           <FontAwesomeIcon icon={theme === 'dark' ? faSun : faMoon} onClick={updateTheme} role='button' title='Toggle Dark/Light mode'/>
         </Container>
       </Navbar>
-      <Comparer />
+      <main><Comparer /></main>
     </GlobalProvider>
   );
 }

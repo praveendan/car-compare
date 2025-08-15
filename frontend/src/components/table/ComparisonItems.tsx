@@ -35,7 +35,7 @@ const ComparisonItems: React.FC<{
               xs={true}
               md={true}
               lg={true}
-              className="border d-flex align-items-center text-wrap text-truncate"
+              className={`d-flex align-items-center text-wrap text-truncate ${index < comparisons.length - 1 && 'border-end'}`}
             >{data} {!data? '': postFix}</Col>
           )
         })

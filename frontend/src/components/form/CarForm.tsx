@@ -1,10 +1,11 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Comparison } from './types';
+import { Comparison } from '../table/types';
 import { ChangeEvent, useContext } from 'react';
 import { GlobalContext } from '../../context/GlobalProvider';
 import { loadAndSetModelData, loadAndSetModelYearData, loadAndSetModelYearTrimData } from '../../api/data';
 import { getTrimStorageKey, getYearStorageKey } from '../../context/helpers';
+import { Card } from 'react-bootstrap';
 
 const CarForm: React.FC<{
   index: number
@@ -56,6 +57,7 @@ const CarForm: React.FC<{
   }
   
   return (
+    <Card className='p-4 rounded-4 shadow'>
     <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Brand</Form.Label>
@@ -113,14 +115,16 @@ const CarForm: React.FC<{
         </Form.Select>
       </Form.Group>
       <Button
-        variant="primary"
+        variant="danger"
         type="submit"
+        className='w-100 rounded-3'
         onClick={removeFunction}
         disabled={removeDisabled}
       >
         Remove
       </Button>
-    </Form>
+      </Form>
+    </Card>
   )
 }
 

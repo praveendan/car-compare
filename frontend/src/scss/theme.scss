@@ -1,0 +1,31 @@
+// =============================
+// Define theme colors in Sass
+// =============================
+$card-bg-light: #ffffff;
+$card-bg-dark: #1e1e1e;
+
+$body-bg-light: #f8f9fa;
+$body-bg-dark: #121212;
+
+$body-color-light: #212529;
+$body-color-dark: #f1f1f1;
+
+// =============================
+// Bootstrap import
+// =============================
+@import "bootstrap/scss/bootstrap";
+
+// =============================
+// Theme-specific CSS variables
+// =============================
+[data-bs-theme="light"] {
+  --bs-body-bg: #{$body-bg-light};
+  --bs-body-color: #{$body-color-light};
+  --bs-card-bg: #{$card-bg-light};
+}
+
+[data-bs-theme="dark"] {
+  --bs-body-bg: #{$body-bg-dark};
+  --bs-body-color: #{$body-color-dark};
+  --bs-card-bg: #{$card-bg-dark};
+}
