@@ -4,7 +4,7 @@ import './scss/base.scss'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './scss/theme.scss';
 
-import Dashboard from './components/dashboard';
+import Dashboard from './components/Dashboard';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

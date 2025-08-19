@@ -1,6 +1,6 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import Comparer from '../pages/comparer';
+import Comparer from '../pages/Comparer';
 import { GlobalProvider } from '../context/GlobalProvider';
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
